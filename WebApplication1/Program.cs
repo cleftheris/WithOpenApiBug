@@ -20,7 +20,9 @@ app.UseHttpsRedirection();
 // Bind to a string array.
 // GET /tags2?names=john&names=jack&names=jane
 app.MapGet("/tags2", (string[]? names) =>
-            $"tag1: {names[0]} , tag2: {names[1]}, tag3: {names[2]}").WithOpenApi();
+            $"tag1: {names[0]} , tag2: {names[1]}, tag3: {names[2]}")
+    .WithOpenApi()
+    .WithTags("Issues");
 
 app.MapUploads();
 

@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.Builder
                 await file.CopyToAsync(stream);
             })
             .WithOpenApi()
-            .WithSummary("IFormFile invalid OpenAPI operation parameters.");
-            
+            .WithTags("Issues");
+
             app.MapPost("/upload_many", async (IFormFileCollection myFiles) =>
             {
                 foreach (var file in myFiles)
@@ -31,7 +31,7 @@ namespace Microsoft.AspNetCore.Builder
                 }
             })
             .WithOpenApi()
-            .WithSummary("IFormFileCollection invalid OpenAPI operation parameters.");
+            .WithTags("Issues");
 
             /**
              * Workarounds
@@ -43,8 +43,10 @@ namespace Microsoft.AspNetCore.Builder
                 app.Logger.LogInformation(tempFile);
                 using var stream = File.OpenWrite(tempFile);
                 await request.File!.CopyToAsync(stream);
-            }).Accepts<FileUploadRequest>("multipart/form-data").WithOpenApi()
-            .WithSummary("This works fine with any file.");
+            })
+            .Accepts<FileUploadRequest>("multipart/form-data").WithOpenApi()
+            .WithSummary("This works fine with any file.")
+            .WithTags("Workarounds");
 
             app.MapPost("/upload_workaround_multiple_params", async (CertificateUploadRequest request) =>
             {
@@ -54,7 +56,8 @@ namespace Microsoft.AspNetCore.Builder
                 await request.File!.CopyToAsync(stream);
             }).Accepts<CertificateUploadRequest>("multipart/form-data")
             .WithOpenApi()
-            .WithSummary("This works fine with multiple form files and other form parameters as well.");
+            .WithSummary("This works fine with multiple form files and other form parameters as well.")
+            .WithTags("Workarounds");
 
             app.MapPost("/upload_many_workaround", async (FileCollectionUploadRequest request) =>
             {
@@ -67,7 +70,8 @@ namespace Microsoft.AspNetCore.Builder
                 }
             }).Accepts<FileCollectionUploadRequest>("multipart/form-data")
             .WithOpenApi()
-            .WithSummary("This works fine with multiple form files and other form parameters as well.");
+            .WithSummary("This works fine with multiple form files and other form parameters as well.")
+            .WithTags("Workarounds");
 
             return app;
         }
