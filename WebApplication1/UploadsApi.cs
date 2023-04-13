@@ -4,7 +4,7 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class UploadsApi
     {
-        public static WebApplication? MapUploads(this WebApplication? app)
+        public static WebApplication MapUploads(this WebApplication app)
         {
 
             /**
