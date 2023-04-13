@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -16,7 +19,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 // Bind to a string array.
 // GET /tags2?names=john&names=jack&names=jane
-app.MapGet("/tags2", (string[] names) =>
+app.MapGet("/tags2", (string[]? names) =>
             $"tag1: {names[0]} , tag2: {names[1]}, tag3: {names[2]}").WithOpenApi();
+
+app.MapUploads();
 
 app.Run();
